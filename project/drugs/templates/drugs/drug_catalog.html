@@ -1,0 +1,22 @@
+{% extends 'drugs/base.html' %}
+{% block content %}
+<div>
+<p>Drug</p>
+
+        {% for i in model %}
+            <form>
+                <h1>{{i.name}}  Категория ({{i.category}})</h1>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td class="leftimg" valign="top">
+                        <img src="{{i.img.url}}" alt="" >
+                    </td>
+                    <td valign="top">
+                        <p>{{i.description}}</p>
+                    </td>
+                </tr>
+</table>
+            </form>
+    {% endfor %}
+</div>
+{% endblock %}

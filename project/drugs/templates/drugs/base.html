@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load drug_tags %}
+    <link rel="stylesheet" type="text/css" href="{% static 'drugs/css/style.css' %}"/>
+    <meta charset="UTF-8">
+    <title>drug catalog</title>
+
+</head>
+<body>
+
+<ul class="navbar">
+  <li><a href="#">Главная</a></li>
+  <li><a href="#">Новости</a></li>
+  <li><a href="#">Контакты</a>
+    <ul>
+      <li><a href="#">Адрес</a></li>
+      <li><a href="#">Телефон</a></li>
+      <li><a href="#">Email</a></li>
+    </ul>
+  </li>
+  <li><a href="#">О нас</a></li>
+</ul>
+
+<ul class="leftmenu">
+  <li><a href="{%url 'drugs'%}">Главная</a></li>
+  <li><a href="#">Новости</a></li>
+  <li><a href="#">Категории</a>
+    <ul>
+       {% show_categories %}
+    </ul>
+  </li>
+  <li><a href="#">О нас</a></li>
+</ul>
+{% block content %}
+{% endblock %}
+</body>
+</html>
