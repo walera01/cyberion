@@ -65,23 +65,24 @@
 
 p{
     color: #dddddd;
-    background-color: #777777;
     padding-right: 10px;
     font-family: "Microsoft PhagsPa";
-    max-width: 200px;
-	height: auto;
+    width: 300px;
+    min-width: 300px;
 }
 div{
   margin-left: 150px;
+
 }
 body{
   background-color: #999999;
+  position: fixed;
 }
 img{
     width: 250px;
 	height: auto;
 }
 .leftimg{
-    width: 280px;
+    width: 250px;
     vertical-align: middle;
 }
