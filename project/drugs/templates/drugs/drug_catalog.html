@@ -3,15 +3,15 @@
 <div>
         {% for i in model %}
             <form >
-                <h1>{{i.name}}  Категория ({{i.category}})</h1>
+                <h1 class="title"><a href="{{i.get_absolute_url}}">{{i.name}} </a></h1>
                 <div>
                 <table width="100%" cellspacing="0" cellpadding="0">
                     <tr>
                         <td class="leftimg" valign="top">
-                            <img src="{{i.img.url}}" alt="" >
+                            <a href="{{i.get_absolute_url}}"><img src="{{i.img.url}}" alt="" ></a>
                         </td>
                         <td valign="top">
-                            <div><p>{{i.description}}</p></div>
+                            <p class = "pip">{{i.description}}</p>
                         </td>
                     </tr>
                 </table>

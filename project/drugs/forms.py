@@ -3,4 +3,5 @@ from .models import *
 
 class RegisterDrugs(forms.ModelForm):
     class Meta:
-        drugs=Drugs
+        drugs = Drugs
+        exclude = [""]

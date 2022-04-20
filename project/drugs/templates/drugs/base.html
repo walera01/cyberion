@@ -16,7 +16,7 @@
 
 <ul class="navbar">
   <li><a href="#">Главная</a></li>
-  <li><a href="#">Новости</a></li>
+  <li><a href="{% url 'addpost'%}">Добавить</a></li>
   <li><a href="#">Контакты</a>
     <ul>
       <li><a href="#">Адрес</a></li>
@@ -28,7 +28,7 @@
 </ul>
 
 <ul class="leftmenu">
-  <li><a href="{%url 'drugs'%}">Главная</a></li>
+  <li><a href="{%url 'drug'%}">Главная</a></li>
   <li><a href="#">Новости</a></li>
   <li><a href="#">Категории</a>
     <ul>
@@ -39,5 +39,21 @@
 </ul>
 {% block content %}
 {% endblock %}
+<div class="foot">
+    <table class="pip">
+        <tr>
+            <td>
+                <h1>Контакая информация</h1>
+                <p> +375(33) 332-67-1</p>
+                <p> +375(44) 528-86-87</p>
+            </td>
+            <td>
+                <h1> Наши адреса </h1>
+                <p> ул.Пролетарска 118а </p>
+                <p> ул.Советская (Мир моды) </p>
+            </td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

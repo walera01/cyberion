@@ -1,15 +1,18 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.generic import ListView, CreateView
+
 from .forms import *
 from .models import *
 
+class AddDrug(CreateView):
+    form_class = RegisterDrugs
+    template_name = 'drugs/adddrug.html'
 
-def drug(request):
-    model=Drugs.objects.all()
-    content={
-        'model': model,
-    }
-    return render(request,'drugs/drug_catalog.html', context=content)
+class Drug(ListView):
+    model = Drugs
+    template_name = 'drugs/drug_catalog.html'
+    context_object_name = 'model'
 
 def sortcategory(request, category_slug):
     cat = Category.objects.filter(slug=category_slug)
@@ -18,3 +21,10 @@ def sortcategory(request, category_slug):
         'model': model,
     }
     return render(request,'drugs/drug_catalog.html', context=content)
+
+def drug1(request, drug):
+    model = Drugs.objects.filter(id=drug)
+    content = {
+        'model': model,
+    }
+    return render(request, 'drugs/drug_catalog.html', context=content)
