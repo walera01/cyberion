@@ -84,9 +84,9 @@ body{
   background-color: #999999;
 }
 
-img{
-    width: 300px;
-	height: auto;
+.imgmain{
+    width: 200px;
+	height: 250px;
 }
 
 .leftimg{
@@ -94,26 +94,9 @@ img{
     vertical-align: middle;
 }
 
-.pip{
-    margin-left: 50px;
-    color: #dddddd;
-    padding-right: 10px;
-    width: 500px;
-    min-width: 350px;
-    font-size: 150%;
-    font-family: Yandex Sans Display Light;
 
-}
-.title a{
-    color: honeydew;
-    text-decoration: none;
-    font-family: Yandex Sans Display Light;
-}
-.title a:hover{
-    color: aqua;
-}
 table{
-    margin-left: -50px;
+    margin-left: 50px;
 }
 .foot{
     background-color: #4f4f4f;
@@ -122,11 +105,7 @@ table{
     width: 100%;
     height: 130px;
 }
-.pip h1{
-    color: white;
-    font-size: 130%;
 
-}
 .foot td{
     margin-left: 30px;
 }
@@ -162,4 +141,14 @@ table{
 }
 .formreg{
     position: center;
+}
+.window{
+    height: 420px;
+    width: 250px;
+    outline: 2px solid #000; /* Чёрная рамка */
+    border: 3px solid #fff; /* Белая рамка */
+    border-radius: 10px;
+}
+.maintable{
+    margin-left: 150px;
 }

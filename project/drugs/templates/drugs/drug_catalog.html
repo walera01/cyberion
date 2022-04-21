@@ -1,22 +1,28 @@
 {% extends 'drugs/base.html' %}
 {% block content %}
-<div>
-        {% for i in model %}
-            <form >
-                <h1 class="title"><a href="{{i.get_absolute_url}}">{{i.name}} </a></h1>
-                <div>
-                <table width="100%" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td class="leftimg" valign="top">
-                            <a href="{{i.get_absolute_url}}"><img src="{{i.img.url}}" alt="" ></a>
-                        </td>
-                        <td valign="top">
-                            <p class = "pip">{{i.description}}</p>
-                        </td>
-                    </tr>
-                </table>
-                </div>
-            </form>
+<>
+<table class="maintable">
+    {% for i in model %}
+
+    <td>
+    <li class="window">
+            <table >
+
+                <tr>
+                    <a  href="{{i.get_absolute_url}}"><img  src="{{i.img.url}}" alt="" class="imgmain" ></a>
+                </tr>
+                <tr>
+                    <h1 >
+                        <a href="{{i.get_absolute_url}}">{{i.name}} </a>
+                    </h1>
+                </tr >
+                <tr>
+                    <p >{{i.description|linebreaks|truncatewords:15}}</p>
+                </tr>
+            </table>
+     </li>
+    </td>
     {% endfor %}
+</table>
 </div>
 {% endblock %}
