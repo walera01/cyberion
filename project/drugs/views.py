@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
 
 from .forms import *
@@ -28,3 +29,8 @@ def drug1(request, drug):
         'model': model,
     }
     return render(request, 'drugs/drug_catalog.html', context=content)
+
+class Register(CreateView):
+    form_class = RegisterUserForm
+    template_name = 'drugs/register.html'
+    success_url = reverse_lazy('drug')

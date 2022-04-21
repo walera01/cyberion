@@ -1,6 +1,6 @@
 {% extends 'drugs/base.html' %}
 {% block content %}
-<form action="" method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data">
     <div class="btn well">
             {% csrf_token %}
         <label class="form">{{form}}</label>

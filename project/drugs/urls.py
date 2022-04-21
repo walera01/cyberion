@@ -9,4 +9,5 @@ urlpatterns = [
     path('category/<slug:category_slug>/',sortcategory, name='category'),
     path('drugi/<int:drug>/', drug1, name="drugs"),
     path('addpost/', AddDrug.as_view(), name='addpost'),
+    path('register/', Register.as_view(), name='register'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
