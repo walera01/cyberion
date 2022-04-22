@@ -1,10 +1,12 @@
 {% extends 'drugs/base.html' %}
 {% block content %}
 <form method="post" enctype="multipart/form-data">
+    <div class="reg">
     <div class="btn well">
             {% csrf_token %}
         <label class="form">{{form}}</label>
             <div><button type="submit" class="btn btn-primary">Отправить</button></div>
     </div>
+        </div>
 </form>
 {% endblock %}
