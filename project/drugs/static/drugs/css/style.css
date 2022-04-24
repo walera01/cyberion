@@ -41,10 +41,11 @@
 }
 
 .leftmenu{
-  background-color: #666;
-  padding-left: 25px;
-  min-width: 0;
-  position: absolute;
+    background-color: #666;
+    padding-left: 25px;
+
+    min-width: 0;
+    position: absolute;
 }
 .leftmenu ul{
   display: none;
@@ -84,6 +85,7 @@ body{
 }
 
 .imgmain{
+    margin-left: 10px;
     width: 180px;
 	height: 220px;
 }
@@ -157,10 +159,10 @@ table{
     outline: 2px solid #000; /* Чёрная рамка */
     border: 3px solid #fff; /* Белая рамка */
     border-radius: 10px;
-
+    margin-bottom: 10px;
 }
 .maintable{
-    position: absolute;
+    position: static;
     margin-left: 150px;
     margin-top: 50px;
 
@@ -169,7 +171,7 @@ table{
    margin-left: 20px;
 }
 .descr{
-    margin-top: -20px;
+    margin-top: -10px;
     width: 220px;
     height: 250px;
 }

@@ -24,7 +24,11 @@
       <li><a href="#">Email</a></li>
     </ul>
   </li>
-  <p class="autor"><a href="{% url 'register'%}">Регистрация</a>|<a href="{% url 'drug'%}">Вход</a></p>
+    {% if request.user.is_authenticated %}
+        <p class="autor">{{user.username}}</a>|<a href="{% url 'logout'%}">Выход</a></p>
+    {% else %}
+        <p class="autor"><a href="{% url 'register'%}">Регистрация</a>|<a href="{% url 'login'%}">Вход</a></p>
+    {% endif %}
 </ul>
 
 <ul class="leftmenu">
