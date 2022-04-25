@@ -5,18 +5,29 @@
 
             <div class="window">
             <div class="imagi">
-                <div>
-                    <a  href="{{i.get_absolute_url}}"><img  src="{{i.img.url}}" alt="" class="imgmain" ></a>
+                <div class="photo">
+                    <a  href="{{i.get_absolute_url}}">
+                        {% if i.img %}
+                            <img  src="{{i.img.url}}" onerror="this.src='https://www.ixbt.com/img/x780x600/n1/news/2021/10/2/22459ff25f8eff76bddf34124cc2c85b16f4cd4a_large.jpg'" alt=" привет" class="imgmain" >
+                        {% endif %}
+                    </a>
                 </div>
                 <div>
                     <h1 >
-                        <a href="{{i.get_absolute_url}}">{{i.name}} </a>
+                        <div class="prise">
+                            <p>{{i.prise}}руб.</p>
+                        </div>
+                        <a  href="{{i.get_absolute_url}}">{{i.name}}</a>
+
                     </h1>
                 </div >
                 <div class="descr">
-                    <p >{{i.description|linebreaks|truncatewords:12}}</p>
+                    {% autoescape on %}
+                        <p >{{i.description|linebreaks|truncatechars:80}}</p>
+                    {% endautoescape %}
                 </div>
-                </div>
+
+            </div>
             </div>
 
 

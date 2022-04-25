@@ -6,6 +6,7 @@ class Drugs(models.Model):
     name = models.CharField(max_length=240)
     description = models.TextField()
     img = models.ImageField()
+    prise = models.FloatField()
     category=models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name="Категории")
     
     def  __str__(self):

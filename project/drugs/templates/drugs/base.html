@@ -15,17 +15,12 @@
 <body>
 
 <ul class="navbar">
-  <li><a href="#">Главная</a></li>
+    {% if request.user.is_authenticated %}
   <li><a href="{% url 'addpost'%}">Добавить</a></li>
-  <li><a href="#">Контакты</a>
-    <ul>
-      <li><a href="#">Адрес</a></li>
-      <li><a href="#">Телефон</a></li>
-      <li><a href="#">Email</a></li>
-    </ul>
+    {% endif %}
   </li>
     {% if request.user.is_authenticated %}
-        <p class="autor">{{user.username}}</a>|<a href="{% url 'logout'%}">Выход</a></p>
+        <p class="autor">{{user.username}} |<a href="{% url 'logout'%}">Выход</a></p>
     {% else %}
         <p class="autor"><a href="{% url 'register'%}">Регистрация</a>|<a href="{% url 'login'%}">Вход</a></p>
     {% endif %}
@@ -33,7 +28,6 @@
 
 <ul class="leftmenu">
   <li><a href="{%url 'drug'%}">Главная</a></li>
-  <li><a href="#">Новости</a></li>
   <li><a href="#">Категории</a>
     <ul>
        {% show_categories %}

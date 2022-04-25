@@ -31,7 +31,7 @@ def drug1(request, drug):
     content = {
         'model': model,
     }
-    return render(request, 'drugs/drug_catalog.html', context=content)
+    return render(request, 'drugs/fulldescription.html', context=content)
 
 class Register(CreateView):
     form_class = RegisterUserForm

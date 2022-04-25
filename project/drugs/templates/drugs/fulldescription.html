@@ -1,0 +1,29 @@
+{% extends 'drugs/base.html' %}
+{% block content %}
+
+    {% for i in model %}
+            <div class="fullpost">
+                <div class="fullimg">
+                        {% if i.img %}
+                            <img  src="{{i.img.url}}" onerror="this.src='https://www.ixbt.com/img/x780x600/n1/news/2021/10/2/22459ff25f8eff76bddf34124cc2c85b16f4cd4a_large.jpg'" alt=" привет" >
+                        {% endif %}
+                </div>
+                <div>
+                    <div class="fullprise">
+                        <h1>{{i.prise}}руб.</h1>
+                    </div>
+                    <h1 class="fulltitle">
+                        {{i.name}}
+                    </h1>
+                </div >
+                <div class="fulldescription">
+                    {% autoescape on %}
+                        <p >{{i.description|linebreaks}}</p>
+                    {% endautoescape %}
+                </div>
+
+            </div>
+            </div>
+
+    {% endfor %}
+{% endblock %}
