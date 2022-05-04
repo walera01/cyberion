@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     {% load static %}
     {% load drug_tags %}
@@ -34,6 +34,20 @@
     </ul>
   </li>
   <li><a href="#">О нас</a></li>
+
+
+     <form method="post" class="fromprise" >
+        <p><b>Цена</b><br>
+            <input type="number" placeholder="от" min="0" max="9000" value="from">
+            <input type="number" placeholder="до" min="0" max="9000">
+            <input type = "submit" action = "from">
+        </p>
+
+ </form>
+
+
+
+
 </ul>
 {% block content %}
 {% endblock %}

@@ -23,3 +23,7 @@ class RegisterUserForm(UserCreationForm):
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
+
+class Prise(forms.ModelForm):
+    prise1 = forms.FloatField(label='Цена от')
+    prise2 = forms.FloatField(label='Цена до')
