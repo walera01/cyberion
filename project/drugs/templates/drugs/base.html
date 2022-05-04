@@ -15,7 +15,7 @@
 <body>
 
 <ul class="navbar">
-    {% if request.user.is_authenticated %}
+    {% if request.user.is_superuser %}
   <li><a href="{% url 'addpost'%}">Добавить</a></li>
     {% endif %}
   </li>

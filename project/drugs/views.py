@@ -18,13 +18,23 @@ class Drug(ListView):
     template_name = 'drugs/drug_catalog.html'
     context_object_name = 'model'
 
-def sortcategory(request, category_slug):
-    cat = Category.objects.filter(slug=category_slug)
-    model = Drugs.objects.filter(category_id=cat[0].id)
-    content = {
-        'model': model,
-    }
-    return render(request,'drugs/drug_catalog.html', context=content)
+
+# def sortcategory(request, category_slug):
+#     cat = Category.objects.filter(slug=category_slug)
+#     model = Drugs.objects.filter(category_id=cat[0].id)
+#     content = {
+#         'model': model,
+#     }
+#     return render(request,'drugs/drug_catalog.html', context=content)
+
+class SorttCategory(ListView):
+    model = Drugs
+    template_name = 'drugs/drug_catalog.html'
+    context_object_name = 'model'
+
+    def get_queryset(self):
+        return Drugs.objects.filter(category__slug=self.kwargs['category_slug']).select_related('category')
+
 
 def drug1(request, drug):
     model = Drugs.objects.filter(id=drug)
