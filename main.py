@@ -1,1 +1,1 @@
-print(int(False))
+print(~100)
