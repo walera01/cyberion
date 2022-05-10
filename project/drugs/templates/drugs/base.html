@@ -10,18 +10,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'drugs/css/style.css' %}"/>
     <meta charset="UTF-8">
     <title>drug catalog</title>
-    <script>
-        function Myfunction(){
-            l1="";
-            if (document.forms['idform'].elements['id1'].value) {
-                location.href = location.href + 'from=' + document.forms['idform'].elements['id1'].value;
-                l1= 'from=' + document.forms['idform'].elements['id1'].value;
-            }
-            if (document.forms['idform'].elements['id2'].value) {
-                location.href = location.href +l1+ 'to=' + document.forms['idform'].elements['id2'].value;
-            }
-        }
-    </script>
 
 </head>
 <body>
@@ -48,14 +36,14 @@
   <li><a href="#">О нас</a></li>
 
 
-     <form method="post" class="fromprise" name="idform">
-        <p>
-            <b>Цена</b>
-            <input  type="number" placeholder="от" min="0" max="9000" name="id1">
-            <input type="number" placeholder="до" min="0" max="9000" name="id2">
-            <input type = "button" value="find" onclick="Myfunction()">
+     <form method="post" class="fromprise" >
+        <p><b>Цена</b><br>
+            <input type="number" placeholder="от" min="0" max="9000" value="from">
+            <input type="number" placeholder="до" min="0" max="9000">
+            <input type = "submit" action = "from">
         </p>
-     </form>
+
+ </form>
 
 
 
