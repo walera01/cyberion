@@ -18,14 +18,16 @@
                             <p>{{i.prise}}руб.</p>
                         </div>
                         <a  href="{{i.get_absolute_url}}">{{i.name}}</a>
-
+                        <a href="edit{{i.get_absolute_url}}">edit</a>
                     </h1>
                 </div >
                 <div class="descr">
                     {% autoescape on %}
                         <p >{{i.description|linebreaks|truncatechars:80}}</p>
                     {% endautoescape %}
+
                 </div>
+
 
             </div>
             </div>

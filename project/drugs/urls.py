@@ -6,10 +6,11 @@ from .views import *
 
 urlpatterns = [
     path('drugi/',Drug.as_view(), name='drug'),
+    path('drugi/<int:drug>/', drug1, name="drugs"),
     path('drugi/<str:sort>/',Drug.as_view(), name='drugsort'),
     path('category/<slug:category_slug>/',SorttCategory.as_view(), name='category'),
     path('category/<slug:category_slug>/<str:sort>/',SorttCategory.as_view(), name='categorysort'),
-    path('drugi/<int:drug>/', drug1, name="drugs"),
+    path('drugi/edit/drugi/<int:drug>/', edit, name='edit'),
     path('addpost/', AddDrug.as_view(), name='addpost'),
     path('login/', Log_in.as_view(), name='login'),
     path('logout/', logout_use, name='logout'),

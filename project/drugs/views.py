@@ -18,6 +18,19 @@ class Drug(ListView):
     template_name = 'drugs/drug_catalog.html'
     context_object_name = 'model'
 
+def edit(request, drug):
+    model = Drugs.objects.get(id=drug)
+    if request.method != 'POST':
+        form = RegisterDrugs(instance=model)
+    else:
+        form = RegisterDrugs(instance=model, data=request.POST)
+        if form.is_valid():
+            form.save()
+
+    context = {
+        'form': form
+    }
+    return render(request, 'drugs/adddrug.html', context)
 
 # def sortcategory(request, category_slug):
 #     cat = Category.objects.filter(slug=category_slug)
