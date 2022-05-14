@@ -2,12 +2,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
+
     {% load static %}
     {% load drug_tags %}
     {% load bootstrap3 %}
     {% bootstrap_css %}
     {% bootstrap_javascript jquery='full' %}
     <link rel="stylesheet" type="text/css" href="{% static 'drugs/css/style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'drugs/css/telega-chat.css' %}"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>drug catalog</title>
 
@@ -45,10 +49,29 @@
 
  </form>
 
-
-
-
 </ul>
+
+
+    <div class="logo_chat_block">
+        <img class="logo_chat" src="../../static/drugs/icon/message_logo.png">
+    </div>
+
+    <script type="text/javascript" src="{% static 'drugs/js/axios.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'drugs/js/telega-chat.js' %}"></script>
+    <script>
+        //триггер
+        //например
+
+        document.querySelector('.logo_chat').addEventListener('click',e=>{
+
+            console.log('триггер');
+
+            new TelegaChat().open()
+
+        })
+
+    </script>
+
 {% block content %}
 {% endblock %}
 <div class="foot">
