@@ -24,3 +24,9 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse('category', kwargs={'category_slug':self.slug})
+
+
+
+class Message(models.Model):
+    id = models.AutoField(primary_key=True, unique=True)
+    text = models.CharField(max_length=255)

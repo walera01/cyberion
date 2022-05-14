@@ -9,14 +9,22 @@ from django.views.generic import ListView, CreateView
 from .forms import *
 from .models import *
 
+
+
+def chat(request):
+    return render(request, 'drugs/room.html')
+
+
 class AddDrug(CreateView):
     form_class = RegisterDrugs
     template_name = 'drugs/adddrug.html'
+
 
 class Drug(ListView):
     model = Drugs
     template_name = 'drugs/drug_catalog.html'
     context_object_name = 'model'
+
 
 def edit(request, drug):
     model = Drugs.objects.get(id=drug)

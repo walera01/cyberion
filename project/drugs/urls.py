@@ -15,5 +15,6 @@ urlpatterns = [
     path('login/', Log_in.as_view(), name='login'),
     path('logout/', logout_use, name='logout'),
     path('register/', Register.as_view(), name='register'),
+    path('chat/', chat, name='chat'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
