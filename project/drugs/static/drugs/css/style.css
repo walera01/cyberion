@@ -3,6 +3,7 @@
   background-color: #666;
   position: absolute;
   top: 100%;
+
 }
 .navbar li:hover ul { display: block; }
 .navbar, #navbar ul {
@@ -15,6 +16,7 @@
   background-color: #666;
   padding-left: 25px;
   min-width: 0;
+    outline: 1px solid #000; /* Чёрная рамка */
 }
 .navbar li {
 
@@ -38,15 +40,15 @@
 .navbar ul li:hover { background-color: #666; }
 
 .leftmenu ul li:hover {
-    border-radius: 10px;
+
     background-color: #f90;
 }
 
 .leftmenu{
     background-color: #666;
-    padding-left: 25px;
-    min-width: 0;
+    width: 130px;
     position: absolute;
+    outline: 0.5px solid #000; /* Чёрная рамка */
 }
 .leftmenu ul{
   display: none;
@@ -55,30 +57,33 @@
   left: 100%;
 }
 .leftmenu li{
-  padding: 15px;
-  display: block;
+    padding: 15px;
+    display: block;
+    margin-left: -40px;
+    border-radius: 4px;
+
 }
 .leftmenu li ul{
-    padding-left: 0;
+    border-radius: 6px;
+    background-color: #666666;
+    margin-left: 1px;
+    font-size: 12px;
 }
 .leftmenu ul li { float: none; }
 
 .leftmenu li:hover ul {
     display: block;
-    padding-top: 0px;
     position: absolute;
     margin-top: -30px;
-    border-radius: 10px;
 }
-
 .leftmenu a{
   color: white;
   text-decoration: none;
+    width: 10px;
 }
 
 .leftmenu li:hover{
     background-color: #f90;
-    margin-left: 0;
 }
 
 body{
@@ -103,23 +108,27 @@ table{
     margin-left: 50px;
 }
 .foot{
-    position: fixed; /* Фиксированное положение */
-    left: 0;
+    display: flex ;
     bottom: 0;
-    padding: 10px;
     background-color: #4f4f4f;
     width: 100%;
-    height: 100px;
+    height: 200px;
 
 }
 
 .foot td{
-    margin-left: 50px;
+    padding-left: 30%;
+    width: 400px;
+}
+.foot h1{
+    font-size: 15px;
+    width: 350px;
 }
 
 .foot p{
-    font-size: 70%;
+    font-size: 13px;
     color: gainsboro;
+    width: 200px;
 }
 
 .form{
@@ -148,10 +157,15 @@ table{
     font-size: 30px;
 }
 .autor{
+    padding-top: 10px;
     float: right;
     display: inline;
     right: 0;
-    font-size: 100%;
+    font-size: 20px;
+}
+.autor :hover{
+    color: #ff9900;
+
 }
 .formreg{
     position: center;
@@ -237,6 +251,10 @@ table{
     margin-left: 200px;
 }
 .fromprise{
-    margin-left: -10px;
+    margin-left: -30px;
     width: 20px;
+}
+.prisewindow{
+    border-radius: 2px;
+    margin-bottom: 3px;
 }
