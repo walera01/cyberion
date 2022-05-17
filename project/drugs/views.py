@@ -20,11 +20,34 @@ class AddDrug(CreateView):
     template_name = 'drugs/adddrug.html'
 
 
-class Drug(ListView):
-    model = Drugs
-    template_name = 'drugs/drug_catalog.html'
-    context_object_name = 'model'
+# class Drug(ListView):
+#     model = Drugs
+#     template_name = 'drugs/drug_catalog.html'
+#     context_object_name = 'model'
 
+def drug(request):
+    if request.method=="GET":
+        model=Drugs.objects.all()
+        context = {
+            'model': model,
+        }
+    elif request.method=="POST":
+        context=sort_prise(request)
+    return render(request,'drugs/drug_catalog.html', context=context )
+
+def sort_prise(request):
+    context = {}
+    max_prise = Drugs.objects.order_by('-prise')[0].prise
+    min_prise = Drugs.objects.order_by('prise')[0].prise
+    if request.POST.get('id1'):
+        min_prise = float(request.POST.get('id1'))
+        context.update({'min_prise': min_prise})
+    if request.POST.get('id2'):
+        max_prise = float(request.POST.get('id2'))
+        context.update({'max_prise': max_prise})
+    model = Drugs.objects.filter(prise__gte=min_prise).filter(prise__lte=max_prise)
+    context.update({'model': model})
+    return context
 
 def edit(request, drug):
     model = Drugs.objects.get(id=drug)
