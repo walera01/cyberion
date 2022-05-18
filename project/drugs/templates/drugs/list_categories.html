@@ -1,3 +1,14 @@
  {% for i in category %}
-        <li><a href="{{ i.get_absolute_url }}">{{i.name}}</a></li>
+        <li class="category">
+            <div class="logo_category">
+            {% if i.icon %}
+                <img  src="{{i.icon.url}}">
+            {% else %}
+                <img src="../../static/drugs/icon/bird.png">
+            {% endif %}
+            </div>
+            <div>
+                 <a href="{{ i.get_absolute_url }}">{{i.name}}</a>
+            </div>
+        </li>
  {% endfor %}

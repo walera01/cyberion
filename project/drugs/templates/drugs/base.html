@@ -19,6 +19,9 @@
 <body>
 
 <ul class="navbar">
+    <div class="cyberion">
+        <h1>Cyberion</h1>
+    </div>
     {% if request.user.is_superuser %}
   <li><a href="{% url 'addpost'%}">Добавить</a></li>
     {% endif %}
@@ -31,7 +34,7 @@
 </ul>
 
 <ul class="leftmenu">
-  <li><a href="{%url 'drug'%}">Главная</a></li>
+  <li class="logo_category"><img  src="../../static/drugs/icon/home.png"><a href="{%url 'drug'%}">Главная</a></li>
   <li><a href="#">Категории</a>
     <ul>
        {% show_categories %}
@@ -73,8 +76,10 @@
 
     </script>
 <div>
-{% block content %}
-{% endblock %}
+
+        {% block content %}
+        {% endblock %}
+
 <div class="foot">
     <table class="pip">
         <tr>

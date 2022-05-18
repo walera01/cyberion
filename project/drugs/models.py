@@ -17,6 +17,7 @@ class Drugs(models.Model):
 
 class Category(models.Model):
     name=models.CharField(max_length=50, db_index=True, verbose_name='Категория')
+    icon = models.ImageField(blank=True)
     slug = models.SlugField(unique=True, db_index = True, verbose_name="URL")
 
     def  __str__(self):
