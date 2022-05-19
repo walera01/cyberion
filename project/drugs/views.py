@@ -19,16 +19,27 @@ class AddDrug(CreateView):
     form_class = RegisterDrugs
     template_name = 'drugs/adddrug.html'
 
-def drug(request):
-    model=Drugs.objects.all()
-    context = {
-        'model': model,
-    }
-    if request.method=="POST":
-        context=sort_prise(request, model)
-    return render(request,'drugs/drug_catalog.html', context=context )
+class Drug(ListView):               #Главная страница и отображение по категориям
+    model = Drugs
+    template_name = 'drugs/drug_catalog.html'
+    context_object_name = 'model'
 
-def sort_prise(request, model):
+    def get_queryset(self):
+        if self.kwargs:
+            return Drugs.objects.filter(category__slug=self.kwargs['category_slug']).select_related('category')
+        else:
+            return Drugs.objects.all()
+
+    def post(self, request, *args, **kwargs):
+
+        if self.kwargs:
+            model = Drugs.objects.filter(category__slug=self.kwargs['category_slug']).select_related('category')
+        else:
+            model = Drugs.objects.all()
+        return render(request,'drugs/drug_catalog.html', context=sort_prise(request, model ))
+
+
+def sort_prise(request, model):                       # Поиск по цене
     context = {}
     max_prise = model.order_by('-prise')[0].prise
     min_prise = model.order_by('prise')[0].prise
@@ -38,6 +49,8 @@ def sort_prise(request, model):
     if request.POST.get('id2'):
         max_prise = float(request.POST.get('id2'))
         context.update({'max_prise': max_prise})
+    if request.POST.get('search'):
+        model = model.filter(name__contains=request.POST.get('search'))
     model = model.filter(prise__gte=min_prise).filter(prise__lte=max_prise)
     context.update({'model': model})
     return context
@@ -56,26 +69,16 @@ def edit(request, drug):
     }
     return render(request, 'drugs/adddrug.html', context=context)
 
-
-class SorttCategory(ListView):
-    model = Drugs
-    template_name = 'drugs/drug_catalog.html'
+class Product(ListView):
+    model = Drugs.objects.all()
+    template_name = 'drugs/fulldescription.html'
     context_object_name = 'model'
 
     def get_queryset(self):
-        return Drugs.objects.filter(category__slug=self.kwargs['category_slug']).select_related('category')
-
-    def post(self, request, *args, **kwargs):
-        model = Drugs.objects.filter(category__slug=self.kwargs['category_slug']).select_related('category')
-        return render(request,'drugs/drug_catalog.html', context=sort_prise(request, model))
+        print(self.kwargs['drug'])
+        return Drugs.objects.filter(id=self.kwargs['drug'])
 
 
-def drug1(request, drug):
-    model = Drugs.objects.filter(id=drug)
-    content = {
-        'model': model,
-    }
-    return render(request, 'drugs/fulldescription.html', context=content)
 
 class Register(CreateView):
     form_class = RegisterUserForm
@@ -99,10 +102,6 @@ def logout_use(request):
     return redirect('login')
 
 
-# class Drug(ListView):
-#     model = Drugs
-#     template_name = 'drugs/drug_catalog.html'
-#     context_object_name = 'model'
 
 # def sortcategory(request, category_slug):
 #     cat = Category.objects.filter(slug=category_slug)

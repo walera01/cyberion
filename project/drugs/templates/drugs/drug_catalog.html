@@ -1,5 +1,12 @@
 {% extends 'drugs/base.html' %}
 {% block content %}
+ <form method="post" name="idform">
+         {% csrf_token %}
+            <div class="search">
+                <input placeholder="Shearch..." type="search"  {% if max_prise %} value="{{ search }}" {%endif%} name="search">
+                <button type = "submit" value="find"><img src="../../static/drugs/icon/search.png"></button>
+            </div>
+ </form>
 <div class="maintable">
     {% for i in model %}
 
