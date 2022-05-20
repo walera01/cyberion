@@ -23,9 +23,9 @@
         <h1>Cyberion</h1>
     </div>
     {% if request.user.is_superuser %}
-  <li><a href="{% url 'addpost'%}">Добавить</a></li>
+         <li><a href="{% url 'addpost'%}">Добавить</a></li>
     {% endif %}
-  </li>
+
     {% if request.user.is_authenticated %}
         <p class="autor">{{user.username}} |<a href="{% url 'logout'%}">Выход</a></p>
     {% else %}
@@ -35,12 +35,12 @@
 
 <ul class="leftmenu">
   <li class="logo_category"><img  src="../../static/drugs/icon/home.png"><a href="{%url 'drug'%}">Главная</a></li>
-  <li><a href="#">Категории</a>
+  <li class="logo_category"><img  src="../../static/drugs/icon/category.png"><a href="#">Категории</a>
     <ul>
        {% show_categories %}
     </ul>
   </li>
-  <li><a href="#">О нас</a></li>
+  <li class="logo_category"><img  src="../../static/drugs/icon/about_us.png"><a href="#">О нас</a></li>
 
 
       <form method="post" class="fromprise" name="idform">

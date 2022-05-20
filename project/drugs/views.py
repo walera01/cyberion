@@ -38,6 +38,9 @@ class Drug(ListView):               #Главная страница и отоб
             model = Drugs.objects.all()
         return render(request,'drugs/drug_catalog.html', context=sort_prise(request, model ))
 
+def icontains(**kw):
+    fields = [['%s=%%s collate utf8_general_ci' % field, value] for (field, value) in kw.items()]
+    return dict(where=[f[0] for f in fields], params=[f[1] for f in fields])
 
 def sort_prise(request, model):                       # Поиск по цене
     context = {}
@@ -50,7 +53,9 @@ def sort_prise(request, model):                       # Поиск по цене
         max_prise = float(request.POST.get('id2'))
         context.update({'max_prise': max_prise})
     if request.POST.get('search'):
-        model = model.filter(name__contains=request.POST.get('search'))
+
+
+        model = model.filter(name__icontains=request.POST.get('search'))
     model = model.filter(prise__gte=min_prise).filter(prise__lte=max_prise)
     context.update({'model': model})
     return context

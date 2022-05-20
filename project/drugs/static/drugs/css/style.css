@@ -36,14 +36,11 @@
   text-align: center;
 }
 .navbar ul li { float: none; }
-.navbar li:hover { background-color: #f90; }
+.navbar li:hover { color: #f90; }
 
 .navbar ul li:hover { background-color: #666; }
 
-.leftmenu ul li:hover {
 
-    background-color: #f90;
-}
 
 .leftmenu{
     box-shadow: 10px 5px 5px gray;
@@ -52,13 +49,14 @@
     width: 130px;
     position: absolute;
     outline: 0.5px solid #000; /* Чёрная рамка */
-    font-size: 18px;
+    font-size: 19px;
 }
 .leftmenu ul{
   display: none;
   background-color: #4f4f4f;
   position: absolute;
   left: 100%;
+
 }
 .leftmenu li{
     padding: 15px;
@@ -71,17 +69,19 @@
     border-radius: 6px;
     background-color: #666666;
     margin-left: -5px;
-    font-size: 12px;
+
     outline: 0.1px solid white ;
     box-shadow: 10px 8px 5px #333333;
 
 }
-.leftmenu ul li { float: none; }
+.leftmenu ul li { float: none;
+}
 
 .leftmenu li:hover ul {
     display: block;
     position: absolute;
     margin-top: -30px;
+    width: 150px;
 
 }
 .leftmenu a{
@@ -89,14 +89,18 @@
   text-decoration: none;
     width: 10px;
     margin-left: 25px;
+
 }
 
-.leftmenu li:hover{
-    background-color: #f90;
+.leftmenu :hover{
+    color: #f90;
+
 }
 
 body{
-  background-color: #999999;
+    /*color: #f8000b;*/
+    background-image: linear-gradient(gainsboro, #999999, #666666 );
+    background-repeat: repeat;
     font-family: Yandex Sans Display Light;
 }
 
@@ -312,16 +316,20 @@ table{
     width: 300px;
 }
 .search button img{
-    width: 30px;
-    height: 30px;
+    background-color: #4f4f4f ;
+    width: 36.5px;
+    height: 32px;
+    margin-top: -2px;
+    margin-left: -6px;
 }
 .search button{
     height: 30px;
-    background-color: #999999;
-    width: 30px;
+    margin-left: -10px;
+    width: 31px;
+
 }
 .search input{
-    width: 250px;
+    width: 270px;
     height: 30px;
 
 }
