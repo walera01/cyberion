@@ -92,7 +92,7 @@
 
 }
 
-.leftmenu :hover{
+.leftmenu li :hover{
     color: #f90;
 
 }

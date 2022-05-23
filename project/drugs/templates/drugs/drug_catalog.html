@@ -3,7 +3,7 @@
  <form method="post" name="idform">
          {% csrf_token %}
             <div class="search">
-                <input placeholder="Shearch..." type="search"  {% if max_prise %} value="{{ search }}" {%endif%} name="search">
+                <input placeholder="Shearch..." type="search"  {% if search %} value="{{search}}" {%endif%} name="search">
                 <button type = "submit" value="find"><img src="../../static/drugs/icon/search.png"></button>
             </div>
  </form>
@@ -26,7 +26,7 @@
                         </div>
                         <a  href="{{i.get_absolute_url}}">{{i.name}}</a>
                         {% if request.user.is_superuser %}
-                            <a href="edit{{i.get_absolute_url}}">edit</a>
+                            <a href="{{i.get_absolute_url}}edit">edit</a>
                         {% endif %}
                     </h1>
                 </div >

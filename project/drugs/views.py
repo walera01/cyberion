@@ -44,18 +44,20 @@ def icontains(**kw):
 
 def sort_prise(request, model):                       # Поиск по цене
     context = {}
+    if request.POST.get('search'):
+        search = str(request.POST.get('search'))
+        context.update({'search': search})
+        model = model.filter(name__icontains=request.POST.get('search'))
     max_prise = model.order_by('-prise')[0].prise
     min_prise = model.order_by('prise')[0].prise
     if request.POST.get('id1'):
         min_prise = float(request.POST.get('id1'))
         context.update({'min_prise': min_prise})
+
     if request.POST.get('id2'):
         max_prise = float(request.POST.get('id2'))
         context.update({'max_prise': max_prise})
-    if request.POST.get('search'):
 
-
-        model = model.filter(name__icontains=request.POST.get('search'))
     model = model.filter(prise__gte=min_prise).filter(prise__lte=max_prise)
     context.update({'model': model})
     return context
