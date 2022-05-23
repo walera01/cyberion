@@ -38,9 +38,6 @@ class Drug(ListView):               #Главная страница и отоб
             model = Drugs.objects.all()
         return render(request,'drugs/drug_catalog.html', context=sort_prise(request, model ))
 
-def icontains(**kw):
-    fields = [['%s=%%s collate utf8_general_ci' % field, value] for (field, value) in kw.items()]
-    return dict(where=[f[0] for f in fields], params=[f[1] for f in fields])
 
 def sort_prise(request, model):                       # Поиск по цене
     context = {}
