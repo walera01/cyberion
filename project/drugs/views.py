@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
+from django.db.models import Q
 
 from .forms import *
 from .models import *
@@ -44,7 +45,7 @@ def sort_prise(request, model):                       # Поиск по цене
     if request.POST.get('search'):
         search = str(request.POST.get('search'))
         context.update({'search': search})
-        model = model.filter(name__icontains=request.POST.get('search'))
+        model = model.filter( Q(name__icontains=request.POST.get('search')) | Q(description__icontains=request.POST.get('search')))
     max_prise = model.order_by('-prise')[0].prise
     min_prise = model.order_by('prise')[0].prise
     if request.POST.get('id1'):
