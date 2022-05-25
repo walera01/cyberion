@@ -45,7 +45,7 @@ def sort_prise(request, model):                       # Поиск по цене
     if request.POST.get('search'):
         search = str(request.POST.get('search'))
         context.update({'search': search})
-        model = model.filter( Q(name__icontains=request.POST.get('search')) | Q(description__icontains=request.POST.get('search')))
+        model = Drugs.objects.filter( Q(name__icontains=request.POST.get('search')) | Q(description__icontains=request.POST.get('search')))
     max_prise = model.order_by('-prise')[0].prise
     min_prise = model.order_by('prise')[0].prise
     if request.POST.get('id1'):

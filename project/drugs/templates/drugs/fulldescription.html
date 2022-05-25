@@ -3,9 +3,9 @@
 
     {% for i in model %}
             <div class="fullpost">
-                <div class="fullimg">
+                <div>
                         {% if i.img %}
-                            <img  src="{{i.img.url}}" onerror="this.src='https://www.ixbt.com/img/x780x600/n1/news/2021/10/2/22459ff25f8eff76bddf34124cc2c85b16f4cd4a_large.jpg'" alt=" привет" >
+                            <img  class="fullimg" src="{{i.img.url}}" onerror="this.src='https://www.ixbt.com/img/x780x600/n1/news/2021/10/2/22459ff25f8eff76bddf34124cc2c85b16f4cd4a_large.jpg'" alt=" привет" >
                         {% endif %}
                 </div>
                 <div>
@@ -17,6 +17,10 @@
                     </h1>
                 </div >
                 <div class="fulldescription">
+                     {% if request.user.is_superuser %}
+                            <a href="{{i.get_absolute_url}}edit">edit</a>
+                     {% endif %}
+
                     {% autoescape on %}
                         <p >{{i.description|linebreaks}}</p>
                     {% endautoescape %}

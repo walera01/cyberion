@@ -254,7 +254,7 @@ table{
     min-height: 500px;
 }
 .fullimg{
-    width: 300px;
+    width: 250px;
     height: auto;
     margin-left: 8px;
     margin-top: 8px;
@@ -265,11 +265,13 @@ table{
     float: right;
 }
 .fulldescription{
-    width: 250px;
-    height: auto;
+    margin-left: 300px;
+    margin-top: 20px;
+    font-size: 23px;
+    width: 30%;
 }
 .fulltitle{
-    margin-left: 200px;
+    margin-left: 300px;
 }
 .fromprise{
     margin-left: -30px;
@@ -334,5 +336,5 @@ table{
 
 }
 .contwindow{
-    min-height: 90vh;
+    min-height: 80vh;
 }

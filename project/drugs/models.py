@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import AbstractUser
 
 
 class Drugs(models.Model):
@@ -9,7 +10,7 @@ class Drugs(models.Model):
     prise = models.FloatField()
     category=models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name="Категории")
     
-    def  __str__(self):
+    def __str__(self):
         return self.name
 
     def get_absolute_url(self):
@@ -26,6 +27,9 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse('category', kwargs={'category_slug':self.slug})
 
+# class Basket(AbstractUser):
+#     drug = models.ManyToManyField(Drugs, verbose_name="Товар в карзине")
+#     buyer = models.ManyToManyField(AbstractUser,  verbose_name="покупатель_корзины")
 
 
 class Message(models.Model):

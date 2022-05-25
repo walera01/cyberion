@@ -11,3 +11,4 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(Drugs)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Message)
+# admin.site.register(Basket)
