@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
 from django.db.models import Q
+from cyberion.project.cart.cart import Cart
 
 from .forms import *
 from .models import *

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'drugs',
     'bootstrap3',
     'debug_toolbar',
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -147,3 +148,5 @@ LOGIN_REDIRECT_URL='drug'
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+CART_SESSION_ID = 'cart'
