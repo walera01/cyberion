@@ -10,5 +10,26 @@
             <div>
                  <a href="{{ i.get_absolute_url }}">{{i.name}}</a>
             </div>
+            <div class="subcategory">
+                <ul>
+                {% for j in subcategories %}
+                    {% if j.category_id == i.id %}
+                        <li >
+                            <div class="logo_category">
+                            {% if j.icon %}
+                                <img  src="{{i.icon.url}}">
+                            {% else %}
+                                <img src="../../static/drugs/icon/bird.png">
+                            {% endif %}
+                            </div>
+                            <div>
+                                 <a href="{{ j.get_absolute_url}}">{{j.name}}</a>
+                            </div>
+                        </li>
+
+                    {% endif %}
+                {% endfor %}
+            </ul>
+                </div>
         </li>
  {% endfor %}

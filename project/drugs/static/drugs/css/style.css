@@ -56,7 +56,20 @@
   background-color: #4f4f4f;
   position: absolute;
   left: 100%;
+}
 
+.subcategory{
+    display: none;
+      background-color: black;
+      position: absolute;
+    margin-left: 130px;
+}
+.category:hover .subcategory{
+    display: block;
+}
+.category li:hover ul{
+    display: block;
+    position: absolute;
 }
 .leftmenu li{
     padding: 15px;
@@ -69,7 +82,6 @@
     border-radius: 6px;
     background-color: #666666;
     margin-left: -5px;
-
     outline: 0.1px solid white ;
     box-shadow: 10px 8px 5px #333333;
 
@@ -84,12 +96,12 @@
     width: 150px;
 
 }
+
 .leftmenu a{
   color: white;
   text-decoration: none;
     width: 10px;
     margin-left: 25px;
-
 }
 
 .leftmenu li :hover{

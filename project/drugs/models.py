@@ -4,11 +4,11 @@ from django.contrib.auth.models import AbstractUser
 
 
 class Drugs(models.Model):
-    name = models.CharField(max_length=240)
+    name = models.CharField(max_length=240, verbose_name="название")
     description = models.TextField()
-    img = models.ImageField()
+    img = models.ImageField(verbose_name="Изображение")
     prise = models.FloatField()
-    category=models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name="Категории")
+    subcategory=models.ForeignKey('SubCategory', on_delete=models.PROTECT, blank=True, null=True, verbose_name="подкатегории")
     
     def __str__(self):
         return self.name
@@ -21,11 +21,25 @@ class Category(models.Model):
     icon = models.ImageField(blank=True)
     slug = models.SlugField(unique=True, db_index = True, verbose_name="URL")
 
+
     def  __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('category', kwargs={'category_slug':self.slug})
+
+
+class SubCategory(models.Model):
+    name = models.CharField(max_length=50, db_index=True, verbose_name='Категория')
+    icon = models.ImageField(blank=True)
+    slug = models.SlugField(unique=True, db_index=True, verbose_name="URL")
+    category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name="Категории")
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('subcategory', kwargs={'subcategory_slug': self.slug})
 
 # class Basket(AbstractUser):
 #     drug = models.ManyToManyField(Drugs, verbose_name="Товар в карзине")

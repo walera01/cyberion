@@ -1,6 +1,7 @@
 from django import template
-from drugs.models import *
-from drugs.forms import *
+from ..forms import *
+from ..models import *
+
 
 
 register = template.Library()
@@ -12,7 +13,9 @@ def get_categories():
 @register.inclusion_tag('drugs/list_categories.html')
 def show_categories():
     category = Category.objects.all()
-    return {'category': category}
+    subcategories = SubCategory.objects.all()
+    return {'category': category,
+            'subcategories': subcategories}
 
 @register.filter()
 def formin():

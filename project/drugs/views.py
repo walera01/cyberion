@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
 from django.db.models import Q
-from cyberion.project.cart.cart import Cart
+
 
 from .forms import *
 from .models import *
@@ -27,15 +27,24 @@ class Drug(ListView):               #Главная страница и отоб
     context_object_name = 'model'
 
     def get_queryset(self):
-        if self.kwargs:
-            return Drugs.objects.filter(category__slug=self.kwargs['category_slug']).select_related('category')
+        if 'subcategory_slug' in self.kwargs.keys():
+            print(self.kwargs)
+            return Drugs.objects.filter(subcategory__slug=self.kwargs['subcategory_slug']).select_related('subcategory')
+        elif 'category_slug' in self.kwargs.keys():
+            print(self.kwargs)
+            return Drugs.objects.filter(subcategory__category__slug=self.kwargs['category_slug']).select_related('subcategory')
         else:
             return Drugs.objects.all()
 
     def post(self, request, *args, **kwargs):
 
-        if self.kwargs:
-            model = Drugs.objects.filter(category__slug=self.kwargs['category_slug']).select_related('category')
+        if 'subcategory_slug' in self.kwargs.keys():
+            print(self.kwargs)
+            return Drugs.objects.filter(subcategory__slug=self.kwargs['subcategory_slug']).select_related('subcategory')
+        elif 'category_slug' in self.kwargs.keys():
+            print(self.kwargs)
+            return Drugs.objects.filter(subcategory__category__slug=self.kwargs['category_slug']).select_related(
+                'subcategory')
         else:
             model = Drugs.objects.all()
         return render(request,'drugs/drug_catalog.html', context=sort_prise(request, model ))
