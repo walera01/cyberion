@@ -1,6 +1,7 @@
 from django.contrib.auth import login,logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -22,11 +23,13 @@ class AddDrug(CreateView):
     template_name = 'drugs/adddrug.html'
 
 class Drug(ListView):               #Главная страница и отображение по категориям
+    paginate_by = 2
     model = Drugs
     template_name = 'drugs/drug_catalog.html'
     context_object_name = 'model'
 
     def get_queryset(self):
+
         if 'subcategory_slug' in self.kwargs.keys():
             print(self.kwargs)
             return Drugs.objects.filter(subcategory__slug=self.kwargs['subcategory_slug']).select_related('subcategory')
@@ -47,6 +50,8 @@ class Drug(ListView):               #Главная страница и отоб
                 'subcategory')
         else:
             model = Drugs.objects.all()
+
+
         return render(request,'drugs/drug_catalog.html', context=sort_prise(request, model ))
 
 
@@ -67,7 +72,12 @@ def sort_prise(request, model):                       # Поиск по цене
         context.update({'max_prise': max_prise})
 
     model = model.filter(prise__gte=min_prise).filter(prise__lte=max_prise)
-    context.update({'model': model})
+
+    paginator = Paginator(model, 1)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context.update({'model': model, 'page_obj': page_obj})
+    print(paginator.num_pages)
     return context
 
 def edit(request, drug):

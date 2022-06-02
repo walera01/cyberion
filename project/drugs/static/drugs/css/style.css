@@ -54,7 +54,6 @@
 .leftmenu ul{
   display: none;
   background-color: #4f4f4f;
-  position: absolute;
   left: 100%;
 }
 
@@ -322,15 +321,16 @@ table{
     display: table;
 }
 .search{
-    outline: 1px solid black;
-    box-shadow: 2px 2px 5px #3c3c3d;
-    float: right;
-    margin-right: 200px;
-    margin-top: -40px;
-    width: 300px;
+    border-radius: 3px;
+    /*box-shadow: 2px 2px 5px #3c3c3d;*/
+    margin-left: 200px;
+    margin-top: -150px;
+    width: 320px;
+    position: absolute;
+
 }
 .search button img{
-    background-color: #4f4f4f ;
+    background-color: #666666 ;
     width: 36.5px;
     height: 32px;
     margin-top: -2px;
@@ -338,7 +338,7 @@ table{
 }
 .search button{
     height: 30px;
-    margin-left: -10px;
+    /*margin-left: -10px;*/
     width: 31px;
 
 }
@@ -347,6 +347,34 @@ table{
     height: 30px;
 
 }
+
+.poisk_prise{
+    margin-left: 170px;
+    margin-top: 20px;
+    box-shadow: 2px 2px 5px #3c3c3d;
+    padding: 30px;
+    width: 350px;
+
+}
+.poisk_prise button{
+    background-color: #333333 ;
+    box-shadow: 2px 2px 5px #3c3c3d;
+}
 .contwindow{
     min-height: 80vh;
+}
+.paginator1{
+    font-size: 25px;
+    display: inline;
+}
+.paginator1 a{
+    color: black;
+    text-decoration: none;
+    padding: 15px;
+    box-shadow: 2px 2px 5px #3c3c3d;
+    border-radius: 500px;
+
+}
+.pag_list{
+    margin-left: 500px;
 }

@@ -43,43 +43,44 @@
   <li class="logo_category"><img  src="../../static/drugs/icon/about_us.png"><a href="#">О нас</a></li>
 
 
-      <form method="post" class="fromprise" name="idform">
-         {% csrf_token %}
-        <p>
-            <b>Цена</b>
-            <input  class="prisewindow" type="number" placeholder="от" min="0" max="9000" step="0.01" {% if min_prise %} value="{{ min_prise }}"{%endif%} name="id1">
-            <input class="prisewindow" type="number" placeholder="до" min="0" max="9000" step="0.01" {% if max_prise %} value="{{ max_prise }}"{%endif%} name="id2">
-            <button class="prisewindow" type = "submit" value="find">find</button>
-        </p>
-     </form>
+
 
 </ul>
 
 
-    <div class="logo_chat_block">
-        <img class="logo_chat" src="../../static/drugs/icon/message_logo.png">
-    </div>
+<!--    <div class="logo_chat_block">-->
+<!--        <img class="logo_chat" src="../../static/drugs/icon/message_logo.png">-->
+<!--    </div>-->
 
-    <script type="text/javascript" src="{% static 'drugs/js/axios.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'drugs/js/telega-chat.js' %}"></script>
-    <script>
-        //триггер
-        //например
+<!--    <script type="text/javascript" src="{% static 'drugs/js/axios.min.js' %}"></script>-->
+<!--    <script type="text/javascript" src="{% static 'drugs/js/telega-chat.js' %}"></script>-->
+<!--    <script>-->
+<!--        //триггер-->
+<!--        //например-->
 
-        document.querySelector('.logo_chat').addEventListener('click',e=>{
+<!--        document.querySelector('.logo_chat').addEventListener('click',e=>{-->
 
-            console.log('триггер');
+<!--            console.log('триггер');-->
 
-            new TelegaChat().open()
+<!--            new TelegaChat().open()-->
 
-        })
+<!--        })-->
 
-    </script>
+<!--    </script>-->
 <div>
     <div class="contwindow">
         {% block content %}
         {% endblock %}
     </div>
+    <nav>
+        <ul class="pag_list">
+            {% for p in page_obj.paginator.page_range %}
+                <li class="paginator1">
+                    <a href="?page={{ p }}">{{ p }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
 <div class="foot">
     <table class="pip">
         <tr>
