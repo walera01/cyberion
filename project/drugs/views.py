@@ -28,19 +28,40 @@ class Drug(ListView):               #Главная страница и отоб
     template_name = 'drugs/drug_catalog.html'
     context_object_name = 'model'
 
-    def get_queryset(self):
+    # def get_queryset(self):
+    #     if 'subcategory_slug' in self.kwargs.keys():
+    #         print(self.kwargs)
+    #         return Drugs.objects.filter(subcategory__slug=self.kwargs['subcategory_slug']).select_related('subcategory')
+    #     elif 'category_slug' in self.kwargs.keys():
+    #         print(self.kwargs)
+    #         return Drugs.objects.filter(subcategory__category__slug=self.kwargs['category_slug']).select_related('subcategory')
+    #     else:
+    #         return Drugs.objects.all()
+
+    def get(self, request, *args, **kwargs):
+
+        if 'search-persons-post' in request.session:
+            request.POST = request.session['search-persons-post']
+            request.method = 'POST'
 
         if 'subcategory_slug' in self.kwargs.keys():
             print(self.kwargs)
-            return Drugs.objects.filter(subcategory__slug=self.kwargs['subcategory_slug']).select_related('subcategory')
+            model=Drugs.objects.filter(subcategory__slug=self.kwargs['subcategory_slug']).select_related('subcategory')
         elif 'category_slug' in self.kwargs.keys():
             print(self.kwargs)
-            return Drugs.objects.filter(subcategory__category__slug=self.kwargs['category_slug']).select_related('subcategory')
+            model= Drugs.objects.filter(subcategory__category__slug=self.kwargs['category_slug']).select_related(
+                'subcategory')
         else:
-            return Drugs.objects.all()
+            model= Drugs.objects.all()
+
+        paginator = Paginator(model, 3)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        context={'model': model, 'page_obj': page_obj}
+        return render(request, 'drugs/drug_catalog.html', context=context)
 
     def post(self, request, *args, **kwargs):
-
+        request.session['search-persons-post'] = request.POST
         if 'subcategory_slug' in self.kwargs.keys():
             print(self.kwargs)
             return Drugs.objects.filter(subcategory__slug=self.kwargs['subcategory_slug']).select_related('subcategory')
@@ -61,17 +82,16 @@ def sort_prise(request, model):                       # Поиск по цене
         search = str(request.POST.get('search'))
         context.update({'search': search})
         model = Drugs.objects.filter( Q(name__icontains=request.POST.get('search')) | Q(description__icontains=request.POST.get('search')))
-    max_prise = model.order_by('-prise')[0].prise
-    min_prise = model.order_by('prise')[0].prise
+
     if request.POST.get('id1'):
         min_prise = float(request.POST.get('id1'))
         context.update({'min_prise': min_prise})
+        model = model.filter(prise__gte=min_prise)
 
     if request.POST.get('id2'):
         max_prise = float(request.POST.get('id2'))
         context.update({'max_prise': max_prise})
-
-    model = model.filter(prise__gte=min_prise).filter(prise__lte=max_prise)
+        model = model.filter(prise__lte=max_prise)
 
     paginator = Paginator(model, 1)
     page_number = request.GET.get('page')
