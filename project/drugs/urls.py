@@ -5,9 +5,11 @@ from django.conf.urls.static import static
 from .views import *
 
 urlpatterns = [
-    path('drugi/',Drug.as_view(), name='drug'),
+    path('drugi/',Drug.as_view(), name='drug'),                                 #все товары
+    re_path(r'^find',Drug.as_view(), name='drugfind'),                       #поиск и поиск по цене
+
     path('drugi/<int:drug>/', Product.as_view(), name="drugs"),
-    path('drugi/<str:sort>/',Drug.as_view(), name='drugsort'),
+    # path('drugi/<str:sort>/',Drug.as_view(), name='drugsort'),
     path('category/<slug:category_slug>/',Drug.as_view(), name='category'),             ## Вывод по категориям
     path('subcategory/<slug:subcategory_slug>/',Drug.as_view(), name='subcategory'),       ## Вывод по подкатегориям
     path('category/<slug:category_slug>/<str:sort>/',Drug.as_view(), name='categorysort'),

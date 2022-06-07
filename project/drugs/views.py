@@ -39,45 +39,48 @@ class Drug(ListView):               #Главная страница и отоб
     #         return Drugs.objects.all()
 
     def get(self, request, *args, **kwargs):
-
-        if 'search-persons-post' in request.session:
-            request.POST = request.session['search-persons-post']
-            request.method = 'POST'
-
         if 'subcategory_slug' in self.kwargs.keys():
-            print(self.kwargs)
             model=Drugs.objects.filter(subcategory__slug=self.kwargs['subcategory_slug']).select_related('subcategory')
         elif 'category_slug' in self.kwargs.keys():
-            print(self.kwargs)
-            model= Drugs.objects.filter(subcategory__category__slug=self.kwargs['category_slug']).select_related(
-                'subcategory')
+            model= Drugs.objects.filter(subcategory__category__slug=self.kwargs['category_slug']).select_related('subcategory')
         else:
             model= Drugs.objects.all()
-
-        paginator = Paginator(model, 3)
+        if 'find' in request.META.get('PATH_INFO'):
+            if 'search' in request.session:
+                find=request.session['search']
+                print("++++++++++",find)
+                print('+++++++', find.get('search'))
+                if find.get('search'):
+                    model = model.filter(Q(name__icontains=str(find.get('search')))| Q(description__icontains=str(find.get('search'))))
+                if find.get('min_prise'):
+                    model = model.filter(prise__gte=find.get('min_prise'))
+                    print('id1=',)
+                if find.get('max_prise'):
+                    model = model.filter(prise__lte=find.get('max_prise'))
+        paginator = Paginator(model, 2)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         context={'model': model, 'page_obj': page_obj}
+        if 'find' in request.META.get('PATH_INFO'):
+            context.update(find)
         return render(request, 'drugs/drug_catalog.html', context=context)
 
     def post(self, request, *args, **kwargs):
-        request.session['search-persons-post'] = request.POST
         if 'subcategory_slug' in self.kwargs.keys():
             print(self.kwargs)
-            return Drugs.objects.filter(subcategory__slug=self.kwargs['subcategory_slug']).select_related('subcategory')
+            model = Drugs.objects.filter(subcategory__slug=self.kwargs['subcategory_slug']).select_related('subcategory')
         elif 'category_slug' in self.kwargs.keys():
             print(self.kwargs)
-            return Drugs.objects.filter(subcategory__category__slug=self.kwargs['category_slug']).select_related(
+            model = Drugs.objects.filter(subcategory__category__slug=self.kwargs['category_slug']).select_related(
                 'subcategory')
         else:
             model = Drugs.objects.all()
-
-
         return render(request,'drugs/drug_catalog.html', context=sort_prise(request, model ))
 
 
 def sort_prise(request, model):                       # Поиск по цене
     context = {}
+    request.session['search'] = {}
     if request.POST.get('search'):
         search = str(request.POST.get('search'))
         context.update({'search': search})
@@ -93,11 +96,12 @@ def sort_prise(request, model):                       # Поиск по цене
         context.update({'max_prise': max_prise})
         model = model.filter(prise__lte=max_prise)
 
-    paginator = Paginator(model, 1)
+    paginator = Paginator(model, 2)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    request.session['search'].update(context)
     context.update({'model': model, 'page_obj': page_obj})
-    print(paginator.num_pages)
+    print(request.session['search'])
     return context
 
 def edit(request, drug):

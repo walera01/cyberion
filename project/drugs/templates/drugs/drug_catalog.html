@@ -1,6 +1,6 @@
 {% extends 'drugs/base.html' %}
 {% block content %}
- <form method="post" name="idform">
+ <form method="post" name="idform" action="/find">
          {% csrf_token %}
             <div class="poisk">
                 <div class="poisk_prise">
