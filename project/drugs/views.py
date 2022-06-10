@@ -39,37 +39,30 @@ class Drug(ListView):               #Главная страница и отоб
     #         return Drugs.objects.all()
 
     def get(self, request, *args, **kwargs):
+        if 'subcategory_slug' in self.kwargs.keys():
+            model=Drugs.objects.filter(subcategory__slug=self.kwargs['subcategory_slug']).select_related('subcategory')
+        elif 'category_slug' in self.kwargs.keys():
+            model= Drugs.objects.filter(subcategory__category__slug=self.kwargs['category_slug']).select_related('subcategory')
+        else:
+            model= Drugs.objects.all()
         if 'find' in request.META.get('PATH_INFO'):
             if 'search' in request.session:
                 find=request.session['search']
-                for obj in serializers.deserialize("json", find):
-                    a=obj
-                print("aaaaaaa++++", a)
-                # print("++++++++++",find)
-                # print('+++++++', for obj in serializers.deserialize("xml", data):
-                #     do_something_with(obj)find.get('search'))
-                # if find.get('search'):
-                #     model = model.filter(Q(name__icontains=str(find.get('search')))| Q(description__icontains=str(find.get('search'))))
-                # if find.get('min_prise'):
-                #     model = model.filter(prise__gte=find.get('min_prise'))
-                #     print('id1=',)
-                # if find.get('max_prise'):
-                #     model = model.filter(prise__lte=find.get('max_prise'))
-                # model = Drugs.objects.filter(pk=find.get('pk'))
-        else:
-            if 'subcategory_slug' in self.kwargs.keys():
-                model=Drugs.objects.filter(subcategory__slug=self.kwargs['subcategory_slug']).select_related('subcategory')
-            elif 'category_slug' in self.kwargs.keys():
-                model= Drugs.objects.filter(subcategory__category__slug=self.kwargs['category_slug']).select_related('subcategory')
-            else:
-                model= Drugs.objects.all()
-
+                print("++++++++++",find)
+                print('+++++++', find.get('search'))
+                if find.get('search'):
+                    model = model.filter(Q(name__icontains=str(find.get('search')))| Q(description__icontains=str(find.get('search'))))
+                if find.get('min_prise'):
+                    model = model.filter(prise__gte=find.get('min_prise'))
+                    print('id1=',)
+                if find.get('max_prise'):
+                    model = model.filter(prise__lte=find.get('max_prise'))
         paginator = Paginator(model, 2)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         context={'model': model, 'page_obj': page_obj}
-        # if 'find' in request.META.get('PATH_INFO'):
-        #     context.update(find)
+        if 'find' in request.META.get('PATH_INFO'):
+            context.update(find)
         return render(request, 'drugs/drug_catalog.html', context=context)
 
     def post(self, request, *args, **kwargs):
@@ -87,7 +80,7 @@ class Drug(ListView):               #Главная страница и отоб
 
 def sort_prise(request, model):                       # Поиск по цене
     context = {}
-    # request.session['search'] = {}
+    request.session['search'] = {}
     if request.POST.get('search'):
         search = str(request.POST.get('search'))
         context.update({'search': search})
@@ -106,12 +99,10 @@ def sort_prise(request, model):                       # Поиск по цене
     paginator = Paginator(model, 2)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    # request.session['search'].update(context)
-    request.session['search']=serializers.serialize("json", model)
+    request.session['search'].update(context)
     context.update({'model': model, 'page_obj': page_obj})
     print(request.session['search'])
 
-    print('model   ', model)
     return context
 
 def edit(request, drug):
