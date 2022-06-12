@@ -39,48 +39,65 @@ class Drug(ListView):               #Главная страница и отоб
     #         return Drugs.objects.all()
 
     def get(self, request, *args, **kwargs):
-        if 'subcategory_slug' in self.kwargs.keys():
-            model=Drugs.objects.filter(subcategory__slug=self.kwargs['subcategory_slug']).select_related('subcategory')
-        elif 'category_slug' in self.kwargs.keys():
-            model= Drugs.objects.filter(subcategory__category__slug=self.kwargs['category_slug']).select_related('subcategory')
-        else:
-            model= Drugs.objects.all()
+        print("++++++++++", request.session['search'])
         if 'find' in request.META.get('PATH_INFO'):
             if 'search' in request.session:
-                find=request.session['search']
-                print("++++++++++",find)
-                print('+++++++', find.get('search'))
-                if find.get('search'):
-                    model = model.filter(Q(name__icontains=str(find.get('search')))| Q(description__icontains=str(find.get('search'))))
-                if find.get('min_prise'):
-                    model = model.filter(prise__gte=find.get('min_prise'))
-                    print('id1=',)
-                if find.get('max_prise'):
-                    model = model.filter(prise__lte=find.get('max_prise'))
+                find = request.session['search'].get('id')
+                print("++++++++++", request.session['search'])
+                print(find)
+
+                model=Drugs.objects.filter(id__in=find)
+                # print('+++++++', find.get('search'))
+                # if find.get('search'):
+                #     model = model.filter(Q(name__icontains=str(find.get('search')))| Q(description__icontains=str(find.get('search'))))
+                # if find.get('min_prise'):
+                #     model = model.filter(prise__gte=find.get('min_prise'))
+                #     print('id1=',)
+                # if find.get('max_prise'):
+                #     model = model.filter(prise__lte=find.get('max_prise'))
+        else:
+            print('fffffffffffaaaaaaaaaaaaaaaaaallllllllll')
+            request.session['search'] = {}
+            if 'subcategory_slug' in self.kwargs.keys():
+                model=Drugs.objects.filter(subcategory__slug=self.kwargs['subcategory_slug']).select_related('subcategory')
+            elif 'category_slug' in self.kwargs.keys():
+                model= Drugs.objects.filter(subcategory__category__slug=self.kwargs['category_slug']).select_related('subcategory')
+            else:
+                model= Drugs.objects.all()
+            pk_drug = []
+            for i in model:
+                pk_drug.append(i.id)
+            request.session['search'] = {'id': pk_drug}
+
         paginator = Paginator(model, 2)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         context={'model': model, 'page_obj': page_obj}
         if 'find' in request.META.get('PATH_INFO'):
-            context.update(find)
+            context.update(request.session['search'])
         return render(request, 'drugs/drug_catalog.html', context=context)
 
     def post(self, request, *args, **kwargs):
-        if 'subcategory_slug' in self.kwargs.keys():
-            print(self.kwargs)
-            model = Drugs.objects.filter(subcategory__slug=self.kwargs['subcategory_slug']).select_related('subcategory')
-        elif 'category_slug' in self.kwargs.keys():
-            print(self.kwargs)
-            model = Drugs.objects.filter(subcategory__category__slug=self.kwargs['category_slug']).select_related(
-                'subcategory')
+        if request.session['search']:
+            model = Drugs.objects.filter(id__in=request.session['search'].get('id'))
         else:
             model = Drugs.objects.all()
+        #     if 'subcategory_slug' in self.kwargs.keys():
+        #         print(self.kwargs)
+        #         model = Drugs.objects.filter(subcategory__slug=self.kwargs['subcategory_slug']).select_related('subcategory')
+        #     elif 'category_slug' in self.kwargs.keys():
+        #         print(self.kwargs)
+        #         model = Drugs.objects.filter(subcategory__category__slug=self.kwargs['category_slug']).select_related(
+        #             'subcategory')
+        #     else:
+        #         model = Drugs.objects.all()
         return render(request,'drugs/drug_catalog.html', context=sort_prise(request, model ))
 
 
 def sort_prise(request, model):                       # Поиск по цене
     context = {}
-    request.session['search'] = {}
+
+
     if request.POST.get('search'):
         search = str(request.POST.get('search'))
         context.update({'search': search})
@@ -99,7 +116,12 @@ def sort_prise(request, model):                       # Поиск по цене
     paginator = Paginator(model, 2)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    pk_drug=[]
+    for i in model:
+        pk_drug.append(i.id)
+    request.session['search']={'id':pk_drug}
     request.session['search'].update(context)
+    print("465464646     ",request.session['search'])
     context.update({'model': model, 'page_obj': page_obj})
     print(request.session['search'])
 

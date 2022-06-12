@@ -215,7 +215,7 @@ table{
     position: static;
     margin-left: 150px;
     margin-top: 50px;
-    min-height: calc(100vh - 150px);
+    min-height: calc(80vh - 150px);
 
 }
 .imagi{
