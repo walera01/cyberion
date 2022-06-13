@@ -23,7 +23,7 @@ class AddDrug(CreateView):
     template_name = 'drugs/adddrug.html'
 
 class Drug(ListView):               #Главная страница и отображение по категориям
-    paginate_by = 2
+    paginate_by = 4
     model = Drugs
     template_name = 'drugs/drug_catalog.html'
     context_object_name = 'model'
@@ -39,37 +39,31 @@ class Drug(ListView):               #Главная страница и отоб
     #         return Drugs.objects.all()
 
     def get(self, request, *args, **kwargs):
-        print("++++++++++", request.session['search'])
+        # print("++++", request.session['id'])
         if 'find' in request.META.get('PATH_INFO'):
-            if 'search' in request.session:
-                find = request.session['search'].get('id')
-                print("++++++++++", request.session['search'])
+            if 'id' in request.session:
+                find = request.session['id'].get('id')
+                print("++++++++++", request.session['id'])
                 print(find)
 
                 model=Drugs.objects.filter(id__in=find)
-                # print('+++++++', find.get('search'))
-                # if find.get('search'):
-                #     model = model.filter(Q(name__icontains=str(find.get('search')))| Q(description__icontains=str(find.get('search'))))
-                # if find.get('min_prise'):
-                #     model = model.filter(prise__gte=find.get('min_prise'))
-                #     print('id1=',)
-                # if find.get('max_prise'):
-                #     model = model.filter(prise__lte=find.get('max_prise'))
+
         else:
             print('fffffffffffaaaaaaaaaaaaaaaaaallllllllll')
             request.session['search'] = {}
             if 'subcategory_slug' in self.kwargs.keys():
                 model=Drugs.objects.filter(subcategory__slug=self.kwargs['subcategory_slug']).select_related('subcategory')
+                request.session['search'].update({'subcategory': self.kwargs['subcategory_slug']})
             elif 'category_slug' in self.kwargs.keys():
                 model= Drugs.objects.filter(subcategory__category__slug=self.kwargs['category_slug']).select_related('subcategory')
+                print(self.kwargs['category_slug'])
+                request.session['search'].update({'category': self.kwargs['category_slug']})
+
             else:
                 model= Drugs.objects.all()
-            pk_drug = []
-            for i in model:
-                pk_drug.append(i.id)
-            request.session['search'] = {'id': pk_drug}
 
-        paginator = Paginator(model, 2)
+
+        paginator = Paginator(model, 4)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         context={'model': model, 'page_obj': page_obj}
@@ -78,8 +72,14 @@ class Drug(ListView):               #Главная страница и отоб
         return render(request, 'drugs/drug_catalog.html', context=context)
 
     def post(self, request, *args, **kwargs):
-        if request.session['search']:
-            model = Drugs.objects.filter(id__in=request.session['search'].get('id'))
+        print("possssst", request.session['search'])
+        print(request.session['search'].get('subcategory'))
+        if request.session['search'].get('subcategory'):
+            model = Drugs.objects.filter(subcategory__slug=request.session['search'].get('subcategory')).select_related('subcategory')
+            print('subcategory++  ', model)
+        if request.session['search'].get('category'):
+            model = Drugs.objects.filter(subcategory__category__slug=request.session['search'].get('category')).select_related('category')
+            print('category++  ',model)
         else:
             model = Drugs.objects.all()
         #     if 'subcategory_slug' in self.kwargs.keys():
@@ -113,17 +113,18 @@ def sort_prise(request, model):                       # Поиск по цене
         context.update({'max_prise': max_prise})
         model = model.filter(prise__lte=max_prise)
 
-    paginator = Paginator(model, 2)
+    paginator = Paginator(model, 4)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     pk_drug=[]
     for i in model:
         pk_drug.append(i.id)
-    request.session['search']={'id':pk_drug}
+    request.session['id']={'id':pk_drug}
     request.session['search'].update(context)
     print("465464646     ",request.session['search'])
     context.update({'model': model, 'page_obj': page_obj})
     print(request.session['search'])
+    print(request.session['id'], 'model', model)
 
     return context
 
