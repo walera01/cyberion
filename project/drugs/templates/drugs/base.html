@@ -72,12 +72,16 @@
         {% block content %}
         {% endblock %}
     </div>
-    <nav>
-        <ul class="pag_list">
+    <nav class="list-pages">
+        <ul >
             {% for p in page_obj.paginator.page_range %}
-                <li class="paginator1">
-                    <a href="?page={{ p }}">{{ p }}</a>
-                </li>
+                {% if page_obj.number == p%}
+                    <li class = "page-num-selected">{{p}}</li>
+                {%elif p >= page_obj.number|add:-4 and p <= page_obj.number|add:4 %}
+                    <li class="page-num">
+                        <a href="?page={{ p }}">{{ p }}</a>
+                    </li>
+                {%endif%}
             {% endfor %}
         </ul>
     </nav>

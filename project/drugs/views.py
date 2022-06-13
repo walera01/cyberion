@@ -74,11 +74,11 @@ class Drug(ListView):               #Главная страница и отоб
     def post(self, request, *args, **kwargs):
         print("possssst", request.session['search'])
         print(request.session['search'].get('subcategory'))
-        if request.session['search'].get('subcategory'):
-            model = Drugs.objects.filter(subcategory__slug=request.session['search'].get('subcategory')).select_related('subcategory')
+        if 'subcategory' in request.session['search']:
+            model = Drugs.objects.filter(subcategory__slug=request.session['search'].get('subcategory'))
             print('subcategory++  ', model)
-        if request.session['search'].get('category'):
-            model = Drugs.objects.filter(subcategory__category__slug=request.session['search'].get('category')).select_related('category')
+        elif 'category' in request.session['search']:
+            model = Drugs.objects.filter(subcategory__category__slug=request.session['search'].get('category'))
             print('category++  ',model)
         else:
             model = Drugs.objects.all()
@@ -91,6 +91,7 @@ class Drug(ListView):               #Главная страница и отоб
         #             'subcategory')
         #     else:
         #         model = Drugs.objects.all()
+        print(model)
         return render(request,'drugs/drug_catalog.html', context=sort_prise(request, model ))
 
 

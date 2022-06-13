@@ -21,7 +21,7 @@
 }
 .navbar li {
 
-  margin-left: 300px;
+  margin-left: 500px;
   position: absolute;
   height: 100%;
   display: inline;
@@ -216,6 +216,7 @@ table{
     margin-left: 150px;
     margin-top: 50px;
     min-height: calc(80vh - 150px);
+    width: 100%;
 
 }
 .imagi{
@@ -362,19 +363,42 @@ table{
 }
 .contwindow{
     min-height: 80vh;
-}
-.paginator1{
-    font-size: 25px;
-    display: inline;
-}
-.paginator1 a{
-    color: black;
-    text-decoration: none;
-    padding: 15px;
-    box-shadow: 2px 2px 5px #3c3c3d;
-    border-radius: 500px;
 
 }
-.pag_list{
-    margin-left: 500px;
+.list-pages {
+	text-align: center;
+	margin: 0 0 10px 0;
 }
+.list-pages ul {
+	margin: 10px 0 0 0;
+	padding: 0;
+	list-style: none;
+}
+.list-pages ul li {
+	display: inline-block;
+	margin: 0 10px 0 0;
+}
+.list-pages a {
+	color: #000;
+	font-size: 24px;
+	text-decoration: none;
+}
+.list-pages .page-num, .page-num-selected {
+	display: inline-block;
+	width: 60px;
+	height: 44px;
+	padding: 2px 0 0 0;
+	border: 1px solid black;
+	border-radius: 50%;
+}
+.list-pages .page-num:hover {
+	box-shadow: 3px 3px 1px #3c3c3d;
+}
+.list-pages .page-num-selected {
+	border: none;
+	color: #000;
+	font-size: 20px;
+}
+.list-pages .page-num-selected:hover {
+	box-shadow: none;
+	}
