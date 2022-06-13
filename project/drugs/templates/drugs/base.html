@@ -32,7 +32,8 @@
         <p class="autor"><a href="{% url 'register'%}">Регистрация</a>|<a href="{% url 'login'%}">Вход</a></p>
     {% endif %}
 </ul>
-
+{% load cache %}
+{% cache 500 sidebar %}
 <ul class="leftmenu">
   <li class="logo_category"><img  src="../../static/drugs/icon/home.png"><a href="{%url 'drug'%}">Главная</a></li>
   <li class="logo_category"><img  src="../../static/drugs/icon/category.png"><a href="#">Категории</a>
@@ -43,7 +44,7 @@
   <li class="logo_category"><img  src="../../static/drugs/icon/about_us.png"><a href="#">О нас</a></li>
 
 
-
+{% endcache %}
 
 </ul>
 
