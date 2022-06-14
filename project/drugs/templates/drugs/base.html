@@ -7,7 +7,7 @@
     {% load drug_tags %}
     {% load bootstrap3 %}
     {% bootstrap_css %}
-    {% bootstrap_javascript jquery='full' %}
+<!--    {% bootstrap_javascript jquery='full' %}-->
     <link rel="stylesheet" type="text/css" href="{% static 'drugs/css/style.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'drugs/css/telega-chat.css' %}"/>
 
@@ -20,7 +20,7 @@
 
 <ul class="navbar">
     <div class="cyberion">
-        <h1>Cyberion</h1>
+        <a href="{%url 'drug'%}">Cyberion</a>
     </div>
     {% if request.user.is_superuser %}
          <li><a href="{% url 'addpost'%}">Добавить</a></li>
@@ -48,26 +48,6 @@
 
 </ul>
 
-
-<!--    <div class="logo_chat_block">-->
-<!--        <img class="logo_chat" src="../../static/drugs/icon/message_logo.png">-->
-<!--    </div>-->
-
-<!--    <script type="text/javascript" src="{% static 'drugs/js/axios.min.js' %}"></script>-->
-<!--    <script type="text/javascript" src="{% static 'drugs/js/telega-chat.js' %}"></script>-->
-<!--    <script>-->
-<!--        //триггер-->
-<!--        //например-->
-
-<!--        document.querySelector('.logo_chat').addEventListener('click',e=>{-->
-
-<!--            console.log('триггер');-->
-
-<!--            new TelegaChat().open()-->
-
-<!--        })-->
-
-<!--    </script>-->
 <div>
     <div class="contwindow">
         {% block content %}
@@ -78,11 +58,12 @@
             {% for p in page_obj.paginator.page_range %}
                 {% if page_obj.number == p%}
                     <li class = "page-num-selected">{{p}}</li>
-                {%elif p >= page_obj.number|add:-4 and p <= page_obj.number|add:4 %}
+                {% elif p >= page_obj.number|add:-4 and p <= page_obj.number|add:5 %}
                     <li class="page-num">
                         <a href="?page={{ p }}">{{ p }}</a>
                     </li>
-                {%endif%}
+
+                {% endif %}
             {% endfor %}
         </ul>
     </nav>
