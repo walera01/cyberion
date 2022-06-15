@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'drugs',
     'bootstrap3',
-    'debug_toolbar',
-    'cart',
+    # 'debug_toolbar',
+    # 'cart',
 ]
 
 MIDDLEWARE = [
