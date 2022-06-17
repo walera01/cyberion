@@ -17,7 +17,7 @@
   background-color: #666;
   padding-left: 25px;
   min-width: 0;
-    outline: 1px solid #000; /* Чёрная рамка */
+    outline: 1px solid #000;
 }
 .navbar li {
 
@@ -48,7 +48,7 @@
     background-color: #666;
     width: 130px;
     position: absolute;
-    outline: 0.5px solid #000; /* Чёрная рамка */
+    outline: 0.5px solid #000;
     font-size: 19px;
 }
 .leftmenu ul{
@@ -110,7 +110,6 @@
 }
 
 body{
-    /*color: #f8000b;*/
     background-image: linear-gradient(gainsboro, #999999, #666666 );
     background-repeat: repeat;
     font-family: Yandex Sans Display Light;
@@ -136,7 +135,7 @@ table{
 
 }
 .foot{
-    outline: 0.5px solid #000; /* Чёрная рамка */
+    outline: 0.5px solid #000;
     display: flex ;
     flex: 0 0 auto;
     background-color: #4f4f4f;
@@ -205,8 +204,8 @@ table{
     float: left;
     height: 420px;
     width: 250px;
-    outline: 2px solid #000; /* Чёрная рамка */
-    border: 2px solid #fff; /* Белая рамка */
+    outline: 2px solid #000;
+    border: 2px solid #fff;
     border-radius: 25px;
     margin-bottom: 10px;
     box-shadow: 8px 8px 5px #3c3c3d;
@@ -260,8 +259,8 @@ table{
     margin-left: 180px;
     margin-top: 40px;
     margin-right: 30px;
-    outline: 2px solid #000; /* Чёрная рамка */
-    border: 2px solid #fff; /* Белая рамка */
+    outline: 2px solid #000;
+    border: 2px solid #fff;
     border-radius: 25px;
     min-height: 500px;
 }
@@ -323,7 +322,7 @@ table{
 }
 .search{
     border-radius: 3px;
-    /*box-shadow: 2px 2px 5px #3c3c3d;*/
+
     margin-left: 200px;
     margin-top: -150px;
     width: 320px;
@@ -339,7 +338,6 @@ table{
 }
 .search button{
     height: 30px;
-    /*margin-left: -10px;*/
     width: 31px;
 
 }

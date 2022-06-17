@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-2@*_7v3ug5a8$qb()voco9mi7d!s1&56k!2&khokn3jyro58bn
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-
-ALLOWED_HOSTS = ['host140620221732.of.by', 'www.host140620221732.of.by']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -77,8 +76,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'project.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -156,19 +154,25 @@ USE_TZ = True
 
 
 
-
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'static_root')
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static', 'static_files'),
-)
+# STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = '/home/host1406/project/cyberion/project/static/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,  'static', 'media')
+MEDIA_ROOT = '/home/host1406/project/cyberion/project/media/'
+
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# # STATICFILES_DIRS = (
+# #     os.path.join(BASE_DIR, 'static'),
+# # )
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR,  'static', 'media')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL='drug'
+
 
 INTERNAL_IPS = [
     '127.0.0.1',
