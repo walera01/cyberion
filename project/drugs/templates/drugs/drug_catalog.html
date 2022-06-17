@@ -7,11 +7,11 @@
                     <b>Цена</b>
                     <input  class="prisewindow" type="number" placeholder="от" min="0" max="10000" step="0.01" {% if min_prise %} value="{{ min_prise }}"{%endif%} name="id1">
                     <input class="prisewindow" type="number" placeholder="до" min="0" max="10000" step="0.01" {% if max_prise %} value="{{ max_prise }}"{%endif%} name="id2">
-                    <button type = "submit" value="find"><img src="../../static/drugs/icon/search.png" width="20px"></button>
+                    <button type = "submit" value="find"><img src="{% static 'drugs/icon/search.png' %}" width="20px"></button>
                 </div>
                 <div class="search">
                     <input placeholder="Shearch..." type="search"  {% if search %} value="{{search}}" {%endif%} name="search">
-                    <button type = "submit" value="find"><img src="../../static/drugs/icon/search.png"></button>
+                    <button type = "submit" value="find"><img src="{% static 'drugs/icon/search.png' %}"></button>
                  </div>
             </div>
  </form>

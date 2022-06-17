@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-2@*_7v3ug5a8$qb()voco9mi7d!s1&56k!2&khokn3jyro58bn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
@@ -77,31 +77,31 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'sql_mode': 'traditional',
-        },
-        'NAME':'host1406_sql',
-        'USER': 'host1406_host1406',
-        'PASSWORD': 'wlad4940274',
-        'HOST': 'localhost',
-        'PORT': '3306'
-    }
-}
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME':'postgres',
-#         'USER': 'postgres',
-#         'PASSWORD': 'admin',
+#         'ENGINE': 'django.db.backends.mysql',
+#         'OPTIONS': {
+#             'sql_mode': 'traditional',
+#         },
+#         'NAME':'host1406_sql',
+#         'USER': 'host1406_host1406',
+#         'PASSWORD': 'wlad4940274',
 #         'HOST': 'localhost',
-#         'PORT': '5432'
+#         'PORT': '3306'
 #     }
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
+        'PORT': '5432'
+    }
+}
 
-
+#
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -154,19 +154,22 @@ USE_TZ = True
 
 
 
-STATIC_URL = '/static/'
-# STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = '/home/host1406/project/cyberion/project/static/'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = '/home/host1406/project/cyberion/project/media/'
 
-# STATIC_URL = '/static/'
+# # Static files (CSS, JavaScript, Images)
+# # https://docs.djangoproject.com/en/4.0/howto/static-files/
+# STATIC_URL = '/project/static/'
+# STATIC_ROOT = '/home/host1406/public_html/project/static/'
+# MEDIA_URL = '/project/media/'
+# MEDIA_ROOT = '/home/host1406/public_html/project/media/'
+
+
+STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# # STATICFILES_DIRS = (
-# #     os.path.join(BASE_DIR, 'static'),
-# # )
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR,  'static', 'media')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,  'static', 'media')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

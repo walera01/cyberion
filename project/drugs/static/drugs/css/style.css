@@ -16,7 +16,7 @@
   height: 30px;
   background-color: #666;
   padding-left: 25px;
-  min-width: 0;
+  min-width: 100%;
     outline: 1px solid #000;
 }
 .navbar li {
@@ -113,6 +113,8 @@ body{
     background-image: linear-gradient(gainsboro, #999999, #666666 );
     background-repeat: repeat;
     font-family: Yandex Sans Display Light;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .imgmain{

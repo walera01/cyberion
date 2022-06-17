@@ -15,7 +15,7 @@
     <title>drug catalog</title>
 
 </head>
-<body>
+<body overflow="hidden">
 
 <ul class="navbar">
     <div class="cyberion">
@@ -34,13 +34,13 @@
 {% load cache %}
 {% cache 500 sidebar %}
 <ul class="leftmenu">
-  <li class="logo_category"><img  src="../../static/drugs/icon/home.png"><a href="{%url 'drug'%}">Главная</a></li>
-  <li class="logo_category"><img  src="../../static/drugs/icon/category.png"><a href="#">Категории</a>
+  <li class="logo_category"><img  src="{% static 'drugs/icon/home.png' %}"><a href="{%url 'drug'%}">Главная</a></li>
+  <li class="logo_category"><img  src="{% static 'drugs/icon/category.png' %}"><a href="#">Категории</a>
     <ul>
        {% show_categories %}
     </ul>
   </li>
-  <li class="logo_category"><img  src="../../static/drugs/icon/about_us.png"><a href="#">О нас</a></li>
+  <li class="logo_category"><img  src="{% static 'drugs/icon/about_us.png' %}"><a href="#">О нас</a></li>
 
 
 {% endcache %}
